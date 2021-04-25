@@ -45,9 +45,8 @@ module.exports = (db) => {
     db.query(query).then(response => {
       templateVars.mapData['id'] = response.rows[0].id;
       res.render("map", templateVars);
-    }).catch((e) => console.log(e));
+    }).catch((err) => console.log(err));
   });
-
 
   router.get('/:id', (req, res) => {
     let query = `
@@ -70,7 +69,7 @@ module.exports = (db) => {
   // POSTs below
 
   router.post('/', (req, res) => {
-    let query = `SELECT * FROM maps;`
+    let query = `SELECT * FROM maps;`;
     db.query(query)
       .then(response => {
         res.end(console.log(response.rows)); // post that returns all map data in array
@@ -84,7 +83,6 @@ module.exports = (db) => {
     UNION
     SELECT title, lat, lng FROM pins WHERE map_id = $1;
     `;
-    console.log(query);
     return db.query(query, [req.params.id])
       .then(res => {
         console.log(res.rows);
@@ -107,8 +105,6 @@ module.exports = (db) => {
         res.send(response);
       }).catch(err => console.log(err.stack));
   });
-
-
 
   router.delete('/:id/delete', (req, res) => {
     let query =`DELETE FROM maps WHERE id = $1`;

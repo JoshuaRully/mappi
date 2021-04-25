@@ -133,7 +133,6 @@
         lng: map.getCenter().lng(),
         zoom: map.getZoom()
       };
-      console.log(currentMapData);
       return currentMapData;
     };
 
@@ -149,24 +148,20 @@
           method: 'PUT',
           data: getMapData(mapId)
         }).done(res => {
-          console.log(res);
           window.location.replace(response);
         });
 
       });
     }
     const editMarker = function(id) {
-      // console.log('Editing marker ', id);
       let form = document.querySelector("div.update-pin");
-      document.getElementById('update-pin-id').innerHTML = `Edit Pin ${id}` // change this to title
+      document.getElementById('update-pin-id').innerHTML = `Edit Pin ${id}`
       form.style.display = 'flex';
       document.querySelector("input#update-pin-title").focus();
       document.querySelector('#update-pin-button').innerHTML=`<button id="save-pin-local" onclick="savePin(${id})">Save Pin</button>`;
     };
     const addlistener = function(id) {
-      console.log('adding listener to id', id);
       document.getElementById(`deletebtn${id}`).addEventListener('click', ()=>{
-        console.log(id);
       })
     }
     const createMarker = function(map, position) {

@@ -110,9 +110,8 @@
 
 
     const editMarker = function(id) {
-      // console.log('Editing marker ', id);
       let form = document.querySelector("div.update-pin");
-      document.getElementById('update-pin-id').innerHTML = `Edit Pin ${id}` // change this to title
+      document.getElementById('update-pin-id').innerHTML = `Edit Pin ${id}`
       form.style.display = 'flex';
       document.querySelector("input#update-pin-title").focus();
       document.querySelector('#update-pin-button').innerHTML=`<button id="save-pin-local" onclick="savePin(${id})">Save Pin</button>`;
@@ -179,12 +178,7 @@
       return marker;
     }
 
-
-
-
     const deleteMarker = function(id) {
-      console.log(id);
-      console.log(markers[id]);
       const marker = markers[id]; // find the marker by given id
       marker.setMap(null);
       delete markers[id];
@@ -277,24 +271,20 @@
         lng: map.getCenter().lng(),
         zoom: map.getZoom()
       };
-      console.log(currentMapData);
       return currentMapData;
     };
 
     const saveMap = function() {
-      console.log('running put');
       $.ajax({
           url: '/pins',
           method: 'PUT',
           data: parsePins(markers),
       }).done(response => {
-        console.log(response);
         $.ajax({
           url:`/maps/${mapId}`,
           method: 'PUT',
           data: getMapData(mapId)
         }).done(res => {
-          console.log(res);
           window.location.replace(`/users/${currentUser.id}`); //go home
         });
       });
@@ -309,17 +299,13 @@
           user_id: currentUser.id
         }
       }).done(res => {
-        console.log('disable button');
         $('#fav-map').prop('disabled', true);
       });
     };
 
-
-
   </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= API_KEY %>&callback=initMap"
     type="text/javascript"></script>
-
 
 </body>
 
