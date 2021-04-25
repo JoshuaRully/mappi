@@ -2,7 +2,6 @@
 require('dotenv').config();
 const path = require('path');
 
-
 // Web server config
 const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
@@ -21,6 +20,7 @@ db.connect();
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
+
 app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
@@ -42,18 +42,6 @@ const userAlice = {
   password: 'password',
   image: 'https://imgur.com/r/puppies/QfLwddi',
 }
-
-// app.get("/", (req, res) => {
-//   const templateVars = {
-//     user: userAlice,
-//     API_KEY: process.env.API_KEY
-//   }
-//   res.render("index", templateVars);
-// });
-
-
-
-
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -83,5 +71,5 @@ app.use("/favourite_maps", favouriteMapsRoutes(db));
 
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`mappi app listening on port ${PORT}`);
 });
